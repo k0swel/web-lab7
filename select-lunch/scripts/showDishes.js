@@ -130,6 +130,7 @@ export function createDishElement(dishObject) {
     const imageElement = document.createElement('img');
     imageElement.loading = 'eager';
     imageElement.src = dishObject.image;
+    imageElement.alt = 'некоторый текст';
     imageElement.classList = ['image-dish'];
     dishElement.appendChild(imageElement);
     
