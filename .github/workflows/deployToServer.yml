@@ -1,0 +1,20 @@
+name: Deploy to server
+on:
+  push:
+    branches:
+      - main
+jobs:
+  connect-to-server-and-deploy-web-site:
+    name: Connect to the server over SSH
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: > 
+            eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github
+            && cd /var/www/web-lab/lab6 && git pull 
